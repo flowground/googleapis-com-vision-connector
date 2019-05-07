@@ -1,0 +1,110 @@
+{
+    "type": "object",
+    "properties": {
+        "parent": {
+            "required": true,
+            "type": "string"
+        },
+        "referenceImageId": {
+            "type": "string"
+        },
+        "alt": {
+            "type": "string",
+            "enum": [
+                "json",
+                "media",
+                "proto"
+            ],
+            "default": "json"
+        },
+        "callback": {
+            "type": "string"
+        },
+        "fields": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "oauth_token": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "A `ReferenceImage` represents a product image and its associated metadata,\nsuch as bounding boxes.",
+            "properties": {
+                "boundingPolys": {
+                    "description": "Bounding polygons around the areas of interest in the reference image.\nOptional. If this field is empty, the system will try to detect regions of\ninterest. At most 10 bounding polygons will be used.\n\nThe provided shape is converted into a non-rotated rectangle. Once\nconverted, the small edge of the rectangle must be greater than or equal\nto 300 pixels. The aspect ratio must be 1:4 or less (i.e. 1:3 is ok; 1:5\nis not).",
+                    "items": {
+                        "description": "A bounding polygon for the detected image annotation.",
+                        "properties": {
+                            "normalizedVertices": {
+                                "description": "The bounding polygon normalized vertices.",
+                                "items": {
+                                    "description": "A vertex represents a 2D point in the image.\nNOTE: the normalized vertex coordinates are relative to the original image\nand range from 0 to 1.",
+                                    "properties": {
+                                        "x": {
+                                            "description": "X coordinate.",
+                                            "format": "float",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "Y coordinate.",
+                                            "format": "float",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "vertices": {
+                                "description": "The bounding polygon vertices.",
+                                "items": {
+                                    "description": "A vertex represents a 2D point in the image.\nNOTE: the vertex coordinates are in the same scale as the original image.",
+                                    "properties": {
+                                        "x": {
+                                            "description": "X coordinate.",
+                                            "format": "int32",
+                                            "type": "integer"
+                                        },
+                                        "y": {
+                                            "description": "Y coordinate.",
+                                            "format": "int32",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "The resource name of the reference image.\n\nFormat is:\n\n`projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID/referenceImages/IMAGE_ID`.\n\nThis field is ignored when creating a reference image.",
+                    "type": "string"
+                },
+                "uri": {
+                    "description": "The Google Cloud Storage URI of the reference image.\n\nThe URI must start with `gs://`.\n\nRequired.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

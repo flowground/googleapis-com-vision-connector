@@ -1,0 +1,86 @@
+{
+    "type": "object",
+    "properties": {
+        "parent": {
+            "required": true,
+            "type": "string"
+        },
+        "productId": {
+            "type": "string"
+        },
+        "alt": {
+            "type": "string",
+            "enum": [
+                "json",
+                "media",
+                "proto"
+            ],
+            "default": "json"
+        },
+        "callback": {
+            "type": "string"
+        },
+        "fields": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "oauth_token": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "A Product contains ReferenceImages.",
+            "properties": {
+                "description": {
+                    "description": "User-provided metadata to be stored with this product. Must be at most 4096\ncharacters long.",
+                    "type": "string"
+                },
+                "displayName": {
+                    "description": "The user-provided name for this Product. Must not be empty. Must be at most\n4096 characters long.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The resource name of the product.\n\nFormat is:\n`projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.\n\nThis field is ignored when creating a product.",
+                    "type": "string"
+                },
+                "productCategory": {
+                    "description": "The category for the product identified by the reference image. This should\nbe either \"homegoods\", \"apparel\", or \"toys\".\n\nThis field is immutable.",
+                    "type": "string"
+                },
+                "productLabels": {
+                    "description": "Key-value pairs that can be attached to a product. At query time,\nconstraints can be specified based on the product_labels.\n\nNote that integer values can be provided as strings, e.g. \"1199\". Only\nstrings with integer values can match a range-based restriction which is\nto be supported soon.\n\nMultiple values can be assigned to the same key. One product may have up to\n100 product_labels.",
+                    "items": {
+                        "description": "A product label represented as a key-value pair.",
+                        "properties": {
+                            "key": {
+                                "description": "The key of the label attached to the product. Cannot be empty and cannot\nexceed 128 bytes.",
+                                "type": "string"
+                            },
+                            "value": {
+                                "description": "The value of the label attached to the product. Cannot be empty and\ncannot exceed 128 bytes.",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

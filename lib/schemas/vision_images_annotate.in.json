@@ -1,0 +1,270 @@
+{
+    "type": "object",
+    "properties": {
+        "access_token": {
+            "type": "string"
+        },
+        "alt": {
+            "type": "string",
+            "enum": [
+                "json",
+                "media",
+                "proto"
+            ],
+            "default": "json"
+        },
+        "callback": {
+            "type": "string"
+        },
+        "fields": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "oauth_token": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Multiple image annotation requests are batched into a single service call.",
+            "properties": {
+                "requests": {
+                    "description": "Individual image annotation requests for this batch.",
+                    "items": {
+                        "description": "Request for performing Google Cloud Vision API tasks over a user-provided\nimage, with user-requested features, and with context information.",
+                        "properties": {
+                            "features": {
+                                "description": "Requested features.",
+                                "items": {
+                                    "description": "The type of Google Cloud Vision API detection to perform, and the maximum\nnumber of results to return for that type. Multiple `Feature` objects can\nbe specified in the `features` list.",
+                                    "properties": {
+                                        "maxResults": {
+                                            "description": "Maximum number of results of this type. Does not apply to\n`TEXT_DETECTION`, `DOCUMENT_TEXT_DETECTION`, or `CROP_HINTS`.",
+                                            "format": "int32",
+                                            "type": "integer"
+                                        },
+                                        "model": {
+                                            "description": "Model to use for the feature.\nSupported values: \"builtin/stable\" (the default if unset) and\n\"builtin/latest\".",
+                                            "type": "string"
+                                        },
+                                        "type": {
+                                            "description": "The feature type.",
+                                            "enum": [
+                                                "TYPE_UNSPECIFIED",
+                                                "FACE_DETECTION",
+                                                "LANDMARK_DETECTION",
+                                                "LOGO_DETECTION",
+                                                "LABEL_DETECTION",
+                                                "TEXT_DETECTION",
+                                                "DOCUMENT_TEXT_DETECTION",
+                                                "SAFE_SEARCH_DETECTION",
+                                                "IMAGE_PROPERTIES",
+                                                "CROP_HINTS",
+                                                "WEB_DETECTION",
+                                                "PRODUCT_SEARCH",
+                                                "OBJECT_LOCALIZATION"
+                                            ],
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "image": {
+                                "description": "The image to be processed.",
+                                "properties": {
+                                    "content": {
+                                        "description": "Image content, represented as a stream of bytes.\nNote: As with all `bytes` fields, protobuffers use a pure binary\nrepresentation, whereas JSON representations use base64.",
+                                        "format": "byte",
+                                        "type": "string"
+                                    },
+                                    "source": {
+                                        "description": "Google Cloud Storage image location, or publicly-accessible image\nURL. If both `content` and `source` are provided for an image, `content`\ntakes precedence and is used to perform the image annotation request.",
+                                        "properties": {
+                                            "gcsImageUri": {
+                                                "description": "**Use `image_uri` instead.**\n\nThe Google Cloud Storage  URI of the form\n`gs://bucket_name/object_name`. Object versioning is not supported. See\n[Google Cloud Storage Request\nURIs](https://cloud.google.com/storage/docs/reference-uris) for more info.",
+                                                "type": "string"
+                                            },
+                                            "imageUri": {
+                                                "description": "The URI of the source image. Can be either:\n\n1. A Google Cloud Storage URI of the form\n   `gs://bucket_name/object_name`. Object versioning is not supported. See\n   [Google Cloud Storage Request\n   URIs](https://cloud.google.com/storage/docs/reference-uris) for more\n   info.\n\n2. A publicly-accessible image HTTP/HTTPS URL. When fetching images from\n   HTTP/HTTPS URLs, Google cannot guarantee that the request will be\n   completed. Your request may fail if the specified host denies the\n   request (e.g. due to request throttling or DOS prevention), or if Google\n   throttles requests to the site for abuse prevention. You should not\n   depend on externally-hosted images for production applications.\n\nWhen both `gcs_image_uri` and `image_uri` are specified, `image_uri` takes\nprecedence.",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "imageContext": {
+                                "description": "Additional context that may accompany the image.",
+                                "properties": {
+                                    "cropHintsParams": {
+                                        "description": "Parameters for crop hints annotation request.",
+                                        "properties": {
+                                            "aspectRatios": {
+                                                "description": "Aspect ratios in floats, representing the ratio of the width to the height\nof the image. For example, if the desired aspect ratio is 4/3, the\ncorresponding float value should be 1.33333.  If not specified, the\nbest possible crop is returned. The number of provided aspect ratios is\nlimited to a maximum of 16; any aspect ratios provided after the 16th are\nignored.",
+                                                "items": {
+                                                    "format": "float",
+                                                    "type": "number"
+                                                },
+                                                "type": "array"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "languageHints": {
+                                        "description": "List of languages to use for TEXT_DETECTION. In most cases, an empty value\nyields the best results since it enables automatic language detection. For\nlanguages based on the Latin alphabet, setting `language_hints` is not\nneeded. In rare cases, when the language of the text in the image is known,\nsetting a hint will help get better results (although it will be a\nsignificant hindrance if the hint is wrong). Text detection returns an\nerror if one or more of the specified languages is not one of the\n[supported languages](/vision/docs/languages).",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "latLongRect": {
+                                        "description": "Not used.",
+                                        "properties": {
+                                            "maxLatLng": {
+                                                "description": "Max lat/long pair.",
+                                                "properties": {
+                                                    "latitude": {
+                                                        "description": "The latitude in degrees. It must be in the range [-90.0, +90.0].",
+                                                        "format": "double",
+                                                        "type": "number"
+                                                    },
+                                                    "longitude": {
+                                                        "description": "The longitude in degrees. It must be in the range [-180.0, +180.0].",
+                                                        "format": "double",
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "minLatLng": {
+                                                "description": "Min lat/long pair.",
+                                                "properties": {
+                                                    "latitude": {
+                                                        "description": "The latitude in degrees. It must be in the range [-90.0, +90.0].",
+                                                        "format": "double",
+                                                        "type": "number"
+                                                    },
+                                                    "longitude": {
+                                                        "description": "The longitude in degrees. It must be in the range [-180.0, +180.0].",
+                                                        "format": "double",
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "productSearchParams": {
+                                        "description": "Parameters for product search.",
+                                        "properties": {
+                                            "boundingPoly": {
+                                                "description": "The bounding polygon around the area of interest in the image.\nOptional. If it is not specified, system discretion will be applied.",
+                                                "properties": {
+                                                    "normalizedVertices": {
+                                                        "description": "The bounding polygon normalized vertices.",
+                                                        "items": {
+                                                            "description": "A vertex represents a 2D point in the image.\nNOTE: the normalized vertex coordinates are relative to the original image\nand range from 0 to 1.",
+                                                            "properties": {
+                                                                "x": {
+                                                                    "description": "X coordinate.",
+                                                                    "format": "float",
+                                                                    "type": "number"
+                                                                },
+                                                                "y": {
+                                                                    "description": "Y coordinate.",
+                                                                    "format": "float",
+                                                                    "type": "number"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "vertices": {
+                                                        "description": "The bounding polygon vertices.",
+                                                        "items": {
+                                                            "description": "A vertex represents a 2D point in the image.\nNOTE: the vertex coordinates are in the same scale as the original image.",
+                                                            "properties": {
+                                                                "x": {
+                                                                    "description": "X coordinate.",
+                                                                    "format": "int32",
+                                                                    "type": "integer"
+                                                                },
+                                                                "y": {
+                                                                    "description": "Y coordinate.",
+                                                                    "format": "int32",
+                                                                    "type": "integer"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "type": "array"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "filter": {
+                                                "description": "The filtering expression. This can be used to restrict search results based\non Product labels. We currently support an AND of OR of key-value\nexpressions, where each expression within an OR must have the same key.\n\nFor example, \"(color = red OR color = blue) AND brand = Google\" is\nacceptable, but not \"(color = red OR brand = Google)\" or \"color: red\".",
+                                                "type": "string"
+                                            },
+                                            "productCategories": {
+                                                "description": "The list of product categories to search in. Currently, we only consider\nthe first category, and either \"homegoods\", \"apparel\", or \"toys\" should be\nspecified.",
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "productSet": {
+                                                "description": "The resource name of a ProductSet to be searched for similar images.\n\nFormat is:\n`projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`.",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "webDetectionParams": {
+                                        "description": "Parameters for web detection.",
+                                        "properties": {
+                                            "includeGeoResults": {
+                                                "description": "Whether to include results derived from the geo information in the image.",
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "__xgafv": {
+            "type": "string",
+            "enum": [
+                "1",
+                "2"
+            ]
+        }
+    }
+}

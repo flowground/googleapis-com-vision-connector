@@ -1,0 +1,322 @@
+{
+    "title": "Cloud Vision",
+    "description": "Integrates Google Vision features, including image labeling, face, logo, and landmark detection, optical character recognition (OCR), and detection of explicit content, into applications.",
+    "docsUrl": "https://cloud.google.com/vision/",
+    "url": "https://api.apis.guru/v2/specs/googleapis.com/vision/v1/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://vision.googleapis.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "Oauth2": {
+                "label": "Oauth 2.0 authentication",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "vision_files_asyncBatchAnnotate": {
+            "main": "./lib/actions/vision_files_asyncBatchAnnotate.js",
+            "title": "Run asynchronous image detection and annotation for a list of generic\nfiles, such as PDF files, which may contain multiple pages and multiple\nimages per page. Progress and results can be retrieved through the\n`google.longrunning.Operations` interface.\n`Operation.metadata` contains `OperationMetadata` (metadata).\n`Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).",
+            "description": "Run asynchronous image detection and annotation for a list of generic\nfiles, such as PDF files, which may contain multiple pages and multiple\nimages per page. Progress and results can be retrieved through the\n`google.longrunning.Operations` interface.\n`Operation.metadata` contains `OperationMetadata` (metadata).\n`Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/vision_files_asyncBatchAnnotate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "vision_images_annotate": {
+            "main": "./lib/actions/vision_images_annotate.js",
+            "title": "Run image detection and annotation for a batch of images.",
+            "description": "Run image detection and annotation for a batch of images.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/vision_images_annotate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "vision_projects_locations_productSets_delete": {
+            "main": "./lib/actions/vision_projects_locations_productSets_delete.js",
+            "title": "Permanently deletes a ProductSet. Products and ReferenceImages in the\nProductSet are not deleted.\n\nThe actual image files are not deleted from Google Cloud Storage.\n\nPossible errors:\n\n* Returns NOT_FOUND if the ProductSet does not exist.",
+            "description": "Permanently deletes a ProductSet. Products and ReferenceImages in the\nProductSet are not deleted.\n\nThe actual image files are not deleted from Google Cloud Storage.\n\nPossible errors:\n\n* Returns NOT_FOUND if the ProductSet does not exist.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/vision_projects_locations_productSets_delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "vision_projects_locations_productSets_get": {
+            "main": "./lib/actions/vision_projects_locations_productSets_get.js",
+            "title": "Gets information associated with a ProductSet.\n\nPossible errors:\n\n* Returns NOT_FOUND if the ProductSet does not exist.",
+            "description": "Gets information associated with a ProductSet.\n\nPossible errors:\n\n* Returns NOT_FOUND if the ProductSet does not exist.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/vision_projects_locations_productSets_get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "vision_projects_locations_productSets_patch": {
+            "main": "./lib/actions/vision_projects_locations_productSets_patch.js",
+            "title": "Makes changes to a ProductSet resource.\nOnly display_name can be updated currently.\n\nPossible errors:\n\n* Returns NOT_FOUND if the ProductSet does not exist.\n* Returns INVALID_ARGUMENT if display_name is present in update_mask but\n  missing from the request or longer than 4096 characters.",
+            "description": "Makes changes to a ProductSet resource.\nOnly display_name can be updated currently.\n\nPossible errors:\n\n* Returns NOT_FOUND if the ProductSet does not exist.\n* Returns INVALID_ARGUMENT if display_name is present in update_mask but\n  missing from the request or longer than 4096 characters.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/vision_projects_locations_productSets_patch.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "vision_projects_locations_productSets_products_list": {
+            "main": "./lib/actions/vision_projects_locations_productSets_products_list.js",
+            "title": "Lists the Products in a ProductSet, in an unspecified order. If the\nProductSet does not exist, the products field of the response will be\nempty.\n\nPossible errors:\n\n* Returns INVALID_ARGUMENT if page_size is greater than 100 or less than 1.",
+            "description": "Lists the Products in a ProductSet, in an unspecified order. If the\nProductSet does not exist, the products field of the response will be\nempty.\n\nPossible errors:\n\n* Returns INVALID_ARGUMENT if page_size is greater than 100 or less than 1.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/vision_projects_locations_productSets_products_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "vision_projects_locations_productSets_addProduct": {
+            "main": "./lib/actions/vision_projects_locations_productSets_addProduct.js",
+            "title": "Adds a Product to the specified ProductSet. If the Product is already\npresent, no change is made.\n\nOne Product can be added to at most 100 ProductSets.\n\nPossible errors:\n\n* Returns NOT_FOUND if the Product or the ProductSet doesn't exist.",
+            "description": "Adds a Product to the specified ProductSet. If the Product is already\npresent, no change is made.\n\nOne Product can be added to at most 100 ProductSets.\n\nPossible errors:\n\n* Returns NOT_FOUND if the Product or the ProductSet doesn't exist.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/vision_projects_locations_productSets_addProduct.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "vision_operations_cancel": {
+            "main": "./lib/actions/vision_operations_cancel.js",
+            "title": "Starts asynchronous cancellation on a long-running operation.  The server\nmakes a best effort to cancel the operation, but success is not\nguaranteed.  If the server doesn't support this method, it returns\n`google.rpc.Code.UNIMPLEMENTED`.  Clients can use\nOperations.GetOperation or\nother methods to check whether the cancellation succeeded or whether the\noperation completed despite cancellation. On successful cancellation,\nthe operation is not deleted; instead, it becomes an operation with\nan Operation.error value with a google.rpc.Status.code of 1,\ncorresponding to `Code.CANCELLED`.",
+            "description": "Starts asynchronous cancellation on a long-running operation.  The server\nmakes a best effort to cancel the operation, but success is not\nguaranteed.  If the server doesn't support this method, it returns\n`google.rpc.Code.UNIMPLEMENTED`.  Clients can use\nOperations.GetOperation or\nother methods to check whether the cancellation succeeded or whether the\noperation completed despite cancellation. On successful cancellation,\nthe operation is not deleted; instead, it becomes an operation with\nan Operation.error value with a google.rpc.Status.code of 1,\ncorresponding to `Code.CANCELLED`.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/vision_operations_cancel.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "vision_projects_locations_productSets_removeProduct": {
+            "main": "./lib/actions/vision_projects_locations_productSets_removeProduct.js",
+            "title": "Removes a Product from the specified ProductSet.\n\nPossible errors:\n\n* Returns NOT_FOUND If the Product is not found under the ProductSet.",
+            "description": "Removes a Product from the specified ProductSet.\n\nPossible errors:\n\n* Returns NOT_FOUND If the Product is not found under the ProductSet.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/vision_projects_locations_productSets_removeProduct.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "vision_projects_locations_productSets_list": {
+            "main": "./lib/actions/vision_projects_locations_productSets_list.js",
+            "title": "Lists ProductSets in an unspecified order.\n\nPossible errors:\n\n* Returns INVALID_ARGUMENT if page_size is greater than 100, or less\n  than 1.",
+            "description": "Lists ProductSets in an unspecified order.\n\nPossible errors:\n\n* Returns INVALID_ARGUMENT if page_size is greater than 100, or less\n  than 1.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/vision_projects_locations_productSets_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "vision_projects_locations_productSets_create": {
+            "main": "./lib/actions/vision_projects_locations_productSets_create.js",
+            "title": "Creates and returns a new ProductSet resource.\n\nPossible errors:\n\n* Returns INVALID_ARGUMENT if display_name is missing, or is longer than\n  4096 characters.",
+            "description": "Creates and returns a new ProductSet resource.\n\nPossible errors:\n\n* Returns INVALID_ARGUMENT if display_name is missing, or is longer than\n  4096 characters.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/vision_projects_locations_productSets_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "vision_projects_locations_productSets_import": {
+            "main": "./lib/actions/vision_projects_locations_productSets_import.js",
+            "title": "Asynchronous API that imports a list of reference images to specified\nproduct sets based on a list of image information.\n\nThe google.longrunning.Operation API can be used to keep track of the\nprogress and results of the request.\n`Operation.metadata` contains `BatchOperationMetadata`. (progress)\n`Operation.response` contains `ImportProductSetsResponse`. (results)\n\nThe input source of this method is a csv file on Google Cloud Storage.\nFor the format of the csv file please see\nImportProductSetsGcsSource.csv_file_uri.",
+            "description": "Asynchronous API that imports a list of reference images to specified\nproduct sets based on a list of image information.\n\nThe google.longrunning.Operation API can be used to keep track of the\nprogress and results of the request.\n`Operation.metadata` contains `BatchOperationMetadata`. (progress)\n`Operation.response` contains `ImportProductSetsResponse`. (results)\n\nThe input source of this method is a csv file on Google Cloud Storage.\nFor the format of the csv file please see\nImportProductSetsGcsSource.csv_file_uri.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/vision_projects_locations_productSets_import.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "vision_projects_locations_products_list": {
+            "main": "./lib/actions/vision_projects_locations_products_list.js",
+            "title": "Lists products in an unspecified order.\n\nPossible errors:\n\n* Returns INVALID_ARGUMENT if page_size is greater than 100 or less than 1.",
+            "description": "Lists products in an unspecified order.\n\nPossible errors:\n\n* Returns INVALID_ARGUMENT if page_size is greater than 100 or less than 1.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/vision_projects_locations_products_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "vision_projects_locations_products_create": {
+            "main": "./lib/actions/vision_projects_locations_products_create.js",
+            "title": "Creates and returns a new product resource.\n\nPossible errors:\n\n* Returns INVALID_ARGUMENT if display_name is missing or longer than 4096\n  characters.\n* Returns INVALID_ARGUMENT if description is longer than 4096 characters.\n* Returns INVALID_ARGUMENT if product_category is missing or invalid.",
+            "description": "Creates and returns a new product resource.\n\nPossible errors:\n\n* Returns INVALID_ARGUMENT if display_name is missing or longer than 4096\n  characters.\n* Returns INVALID_ARGUMENT if description is longer than 4096 characters.\n* Returns INVALID_ARGUMENT if product_category is missing or invalid.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/vision_projects_locations_products_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "vision_projects_locations_products_referenceImages_list": {
+            "main": "./lib/actions/vision_projects_locations_products_referenceImages_list.js",
+            "title": "Lists reference images.\n\nPossible errors:\n\n* Returns NOT_FOUND if the parent product does not exist.\n* Returns INVALID_ARGUMENT if the page_size is greater than 100, or less\n  than 1.",
+            "description": "Lists reference images.\n\nPossible errors:\n\n* Returns NOT_FOUND if the parent product does not exist.\n* Returns INVALID_ARGUMENT if the page_size is greater than 100, or less\n  than 1.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/vision_projects_locations_products_referenceImages_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "vision_projects_locations_products_referenceImages_create": {
+            "main": "./lib/actions/vision_projects_locations_products_referenceImages_create.js",
+            "title": "Creates and returns a new ReferenceImage resource.\n\nThe `bounding_poly` field is optional. If `bounding_poly` is not specified,\nthe system will try to detect regions of interest in the image that are\ncompatible with the product_category on the parent product. If it is\nspecified, detection is ALWAYS skipped. The system converts polygons into\nnon-rotated rectangles.\n\nNote that the pipeline will resize the image if the image resolution is too\nlarge to process (above 50MP).\n\nPossible errors:\n\n* Returns INVALID_ARGUMENT if the image_uri is missing or longer than 4096\n  characters.\n* Returns INVALID_ARGUMENT if the product does not exist.\n* Returns INVALID_ARGUMENT if bounding_poly is not provided, and nothing\n  compatible with the parent product's product_category is detected.\n* Returns INVALID_ARGUMENT if bounding_poly contains more than 10 polygons.",
+            "description": "Creates and returns a new ReferenceImage resource.\n\nThe `bounding_poly` field is optional. If `bounding_poly` is not specified,\nthe system will try to detect regions of interest in the image that are\ncompatible with the product_category on the parent product. If it is\nspecified, detection is ALWAYS skipped. The system converts polygons into\nnon-rotated rectangles.\n\nNote that the pipeline will resize the image if the image resolution is too\nlarge to process (above 50MP).\n\nPossible errors:\n\n* Returns INVALID_ARGUMENT if the image_uri is missing or longer than 4096\n  characters.\n* Returns INVALID_ARGUMENT if the product does not exist.\n* Returns INVALID_ARGUMENT if bounding_poly is not provided, and nothing\n  compatible with the parent product's product_category is detected.\n* Returns INVALID_ARGUMENT if bounding_poly contains more than 10 polygons.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/vision_projects_locations_products_referenceImages_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
