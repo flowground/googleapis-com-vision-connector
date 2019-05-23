@@ -52655,12 +52655,13 @@
                 "description": "Oauth 2.0 authentication",
                 "type": "oauth2",
                 "flows": {
-                    "implicit": {
+                    "authorizationCode": {
                         "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
                         "scopes": {
                             "https://www.googleapis.com/auth/cloud-platform": "View and manage your data across Google Cloud Platform services",
                             "https://www.googleapis.com/auth/cloud-vision": "Apply machine learning models to understand and label images"
-                        }
+                        },
+                        "tokenUrl": "https://www.googleapis.com/oauth2/v4/token"
                     }
                 }
             }
